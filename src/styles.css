@@ -239,7 +239,35 @@ h1 { isolation: isolate; }
   font-size: .95rem;
 }
 .photo-slot__box svg { width: 40px; height: 40px; fill: none; stroke: #9fb0c4; stroke-width: 1.5; margin: 0 auto; }
-.photo-slot__img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-lg); }
+/* ---------- Logo z panelu ---------- */
+.logo__img { height: 40px; width: auto; max-width: 190px; object-fit: contain; }
+
+/* ---------- Zespół ---------- */
+.team-photo { margin: 0 0 2.5rem; }
+.team-photo img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-lg); }
+.team-photo figcaption { font-size: .88rem; color: var(--muted); margin-top: .6rem; text-align: center; }
+.team { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(220px, 270px)); justify-content: center; }
+.person {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.person__photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--navy-100); }
+.person__photo--empty {
+  display: grid; place-content: center; justify-items: center; gap: .5rem;
+  color: var(--muted); font-size: .9rem; text-align: center;
+}
+.person__photo--empty svg { width: 56px; height: 56px; fill: none; stroke: #9fb0c4; stroke-width: 1.5; stroke-linecap: round; }
+.person__body { padding: 1.1rem 1.25rem 1.35rem; }
+.person__name { font-size: 1.1rem; margin: 0 0 .2rem; }
+.person__role { font-family: var(--font-head); font-weight: 700; font-size: .9rem; color: var(--gold-600); margin: 0 0 .6rem; }
+.person__bio { color: var(--muted); font-size: .93rem; margin: 0 0 .7rem; }
+.person__contact { display: grid; gap: .15rem; font-size: .9rem; margin: 0; }
+.person__contact a { text-decoration: none; font-weight: 600; overflow-wrap: anywhere; }
+.person--placeholder { border: 2px dashed #c9d4e2; background: transparent; }
+.person--placeholder .person__photo { background: rgba(255,255,255,.5); }
+.person--placeholder .person__name, .person--placeholder .person__role { color: var(--muted); }
+
+.photo-slot__img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-lg); }
 .hero__art--photo img { width: 100%; height: auto; border-radius: var(--radius-lg); object-fit: cover; }
 .review__photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; float: left; margin-right: .8rem; }
 .review figcaption::after { content: ""; display: block; clear: both; }

@@ -95,7 +95,7 @@ może logować się do `/admin`. Dostęp odbierasz w tym samym miejscu.
 
 1. Wejdź na **fortika-storna.netlify.app/admin** (po podpięciu domeny: **fortika.pl/admin**) i zaloguj się.
 2. Po lewej wybierz:
-   - **Telefon, adres i godziny**: telefon, e-mail, adres, godziny pracy, Facebook, dane rejestrowe,
+   - **Logo, telefon, adres i godziny**: logo, telefon, e-mail, adres, godziny pracy, Facebook, dane rejestrowe,
    - **Sekcje strony głównej**: sekcje w kolejności od góry (baner, usługi, dla kogo, …, kontakt),
    - **Polityka prywatności**,
    - **Google i Facebook (rzadko zmieniane)**: opis strony w wynikach Google i po udostępnieniu linku.
@@ -107,9 +107,24 @@ może logować się do `/admin`. Dostęp odbierasz w tym samym miejscu.
    Postęp widać w Netlify, w zakładce **Deploys**.
 
 ### Przykład: wpisanie numeru telefonu
-**Telefon, adres i godziny → Dane kontaktowe i rejestrowe firmy → Numer telefonu** → wpisz np. `42 123 45 67` → **Opublikuj teraz**.
+**Logo, telefon, adres i godziny → Logo i dane kontaktowe firmy → Numer telefonu** → wpisz np. `42 123 45 67` → **Opublikuj teraz**.
 Numer pojawi się w nagłówku, banerze, sekcji kontakt i stopce. Kliknięcie go na telefonie od razu dzwoni.
 
+### Logo firmy
+**Logo, telefon, adres i godziny → Logo i dane kontaktowe firmy**, a potem pola:
+- **Logo firmy**: w nagłówku strony (na białym tle),
+- **Logo na ciemne tło (stopka)**: jasna wersja do granatowej stopki,
+- **Ikonka na karcie przeglądarki**: mały kwadratowy znak.
+
+Najlepiej plik SVG albo PNG z przezroczystym tłem. Dopóki pola są puste, widać obecny znak „F Fortika”.
+
+### Zespół i zdjęcia pracowników
+**Sekcje strony głównej → 5. Nasz zespół**:
+- **Wspólne zdjęcie całego zespołu**: duże, poziome zdjęcie nad kartami (opcjonalnie),
+- **Pracownicy → Dodaj pracownika**: zdjęcie (pionowe), imię i nazwisko, stanowisko, kilka słów, e-mail i telefon (opcjonalnie).
+
+Dopóki nie dodasz nikogo, na stronie widać trzy puste ramki. Sekcję możesz ukryć przełącznikiem „Pokazuj sekcję zespołu”.
+Zdjęcia i dane pracowników publikuj tylko za ich zgodą.
 ### Listy (usługi, FAQ, opinie, cennik, kroki)
 - **Dodaj:** przycisk „Dodaj …” na górze listy.
 - **Usuń:** ikona **×** przy pozycji.

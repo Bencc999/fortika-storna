@@ -5,7 +5,7 @@ import { MD_OPTIONS, telHref, absoluteUrl, mdFilter } from "./filtry.js";
 const { CMS, h, createClass, nunjucks, markdownit } = window;
 const md = markdownit(MD_OPTIONS);
 
-const PLIKI = ["firma", "seo", "hero", "uslugi", "dla_kogo", "dlaczego", "kroki", "wycena", "opinie", "faq", "kontakt"];
+const PLIKI = ["firma", "seo", "hero", "uslugi", "dla_kogo", "dlaczego", "zespol", "kroki", "wycena", "opinie", "faq", "kontakt"];
 
 // Które fragmenty strony pokazać w podglądzie przy edycji danego pliku
 const FRAGMENTY = {
@@ -13,6 +13,7 @@ const FRAGMENTY = {
   uslugi: ["#uslugi"],
   dla_kogo: ["#dla-kogo"],
   dlaczego: ["#dlaczego"],
+  zespol: ["#zespol"],
   kroki: ["#jak-zaczac"],
   wycena: ["#wycena"],
   opinie: ["#opinie"],
@@ -59,7 +60,7 @@ function trescBody(html) {
 
 // Zdjęcia wgrane przed publikacją nie są jeszcze na serwerze – panel podaje ich tymczasowy adres
 function podmienZdjecia(html, getAsset) {
-  return html.replace(/(src|content)="(\/img\/uploads\/[^"]+)"/g, (_, atr, sciezka) => `${atr}="${getAsset(sciezka)}"`);
+  return html.replace(/(src|content|href)="(\/img\/uploads\/[^"]+)"/g, (_, atr, sciezka) => `${atr}="${getAsset(sciezka)}"`);
 }
 
 // Zostawia tylko wybrane fragmenty strony (np. samą sekcję FAQ)

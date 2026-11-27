@@ -37,16 +37,19 @@ collections:
   #  1. TELEFON, ADRES I DANE FIRMY – najczęściej zmieniane
   # =======================================================
   - name: ustawienia
-    label: "Telefon, adres i godziny"
+    label: "Logo, telefon, adres i godziny"
     label_singular: "Dane kontaktowe"
     description: >
-      Numer telefonu, e-mail, adres, godziny pracy i dane rejestrowe.
+      Logo firmy, numer telefonu, e-mail, adres, godziny pracy i dane rejestrowe.
       Zmiana tutaj od razu aktualizuje wszystkie miejsca na stronie (nagłówek, baner, kontakt, stopkę).
     files:
       - name: firma
-        label: "Dane kontaktowe i rejestrowe firmy"
+        label: "Logo i dane kontaktowe firmy"
         file: src/_data/firma.json
         fields:
+          - { name: logo, label: "🖼️ Logo firmy", widget: image, required: false, choose_url: false, hint: "Pojawi się w nagłówku strony (na białym tle). Najlepiej plik SVG albo PNG z przezroczystym tłem, poziomy, ok. 400 px szerokości. Zostaw puste, żeby została litera „F” z napisem Fortika." }
+          - { name: logo_jasne, label: "🖼️ Logo na ciemne tło (stopka)", widget: image, required: false, choose_url: false, hint: "Jasna (np. biała) wersja logo do granatowej stopki. Jeśli jej nie wgrasz, w stopce zostanie obecny znak." }
+          - { name: favicon, label: "Ikonka na karcie przeglądarki", widget: image, required: false, choose_url: false, hint: "Mały kwadratowy znak (np. sam symbol z logo), PNG lub SVG, najlepiej 512×512 px." }
           - { name: telefon, label: "📞 Numer telefonu", widget: string, hint: "Np. 42 123 45 67 albo +48 600 123 456. Pojawi się w nagłówku, banerze, sekcji Kontakt i stopce. Na telefonie będzie można w niego kliknąć, żeby zadzwonić." }
           - { name: email, label: "✉️ Adres e-mail", widget: string, hint: "Na ten adres trafiają też wiadomości z formularzy." }
           - { name: godziny, label: "🕘 Godziny pracy", widget: string, required: false, hint: "Np. pon.–pt.: 8:00–16:00" }
@@ -83,7 +86,7 @@ collections:
           - { name: opis, label: "Tekst pod tytułem", widget: text, hint: "2–3 zdania o tym, co robicie." }
           - { name: przycisk_glowny, label: "Napis na złotym przycisku", widget: string, hint: "Przycisk przenosi do formularza kontaktowego." }
           - { name: przycisk_drugi, label: "Napis na białym przycisku", widget: string, hint: "Przycisk przenosi do sekcji Wycena." }
-          - { name: zacheta_telefon, label: "Tekst przed numerem telefonu (bez numeru!)", widget: string, hint: "Np. „Wolisz porozmawiać? Zadzwoń:”. Numer dopisuje się sam. Zmieniasz go w menu „Telefon, adres i godziny”." }
+          - { name: zacheta_telefon, label: "Tekst przed numerem telefonu (bez numeru!)", widget: string, hint: "Np. „Wolisz porozmawiać? Zadzwoń:”. Numer dopisuje się sam. Zmieniasz go w menu „Logo, telefon, adres i godziny”." }
           - name: wyrozniki
             label: "Plakietki pod przyciskami"
             label_singular: "plakietkę"
@@ -187,9 +190,37 @@ collections:
               - { name: liczba, label: "Liczba w kwadracie zamiast ikony", widget: string, required: false, hint: "Np. „10+”. Zostaw puste, żeby pokazać ikonę." }
               - { name: ikona, label: "Ikona", widget: select, default: zegar, options: *ikony }
 
-      # ---------- 5. JAK ZACZĄĆ ----------
+      # ---------- 5. ZESPÓŁ ----------
+      - name: zespol
+        label: "5. Nasz zespół (zdjęcia pracowników) 👥"
+        file: src/_data/zespol.json
+        fields:
+          - { name: pokaz_sekcje, label: "Pokazuj sekcję zespołu", widget: boolean, default: true }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
+          - { name: opis, label: "Tekst pod tytułem", widget: text, required: false }
+          - { name: zdjecie_zespolu, label: "📷 Wspólne zdjęcie całego zespołu", widget: image, required: false, choose_url: false, hint: "Duże zdjęcie nad kartami pracowników. Poziome, najlepiej 1600×900 px. Zostaw puste, jeśli wolisz same karty." }
+          - { name: zdjecie_zespolu_opis, label: "Co widać na wspólnym zdjęciu", widget: string, required: false, hint: "Krótki opis dla osób niewidomych i dla Google." }
+          - { name: zdjecie_zespolu_podpis, label: "Podpis pod wspólnym zdjęciem", widget: string, required: false }
+          - name: osoby
+            label: "Pracownicy"
+            label_singular: "pracownika"
+            widget: list
+            required: false
+            summary: "{{fields.imie}} – {{fields.stanowisko}}"
+            collapsed: true
+            hint: "Każdy pracownik to osobna karta ze zdjęciem. Kolejność zmienisz, przeciągając za uchwyt ═. Dopóki lista jest pusta, na stronie widać trzy puste ramki. Zdjęcia publikuj tylko za zgodą pracownika."
+            fields:
+              - { name: zdjecie, label: "📷 Zdjęcie", widget: image, required: false, choose_url: false, hint: "Pionowe (portret), najlepiej 800×1000 px. Bez zdjęcia pokaże się szara sylwetka." }
+              - { name: imie, label: "Imię i nazwisko", widget: string }
+              - { name: stanowisko, label: "Stanowisko", widget: string, required: false, hint: "Np. Główna księgowa, Specjalistka ds. kadr i płac." }
+              - { name: opis, label: "Kilka słów o osobie", widget: text, required: false, hint: "1–2 zdania, np. czym się zajmuje albo jakie ma uprawnienia." }
+              - { name: email, label: "E-mail", widget: string, required: false }
+              - { name: telefon, label: "Telefon", widget: string, required: false }
+
+      # ---------- 6. JAK ZACZĄĆ ----------
       - name: kroki
-        label: "5. Jak zacząć współpracę (kroki)"
+        label: "6. Jak zacząć współpracę (kroki)"
         file: src/_data/kroki.json
         fields:
           - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
@@ -208,7 +239,7 @@ collections:
 
       # ---------- 6. WYCENA ----------
       - name: wycena
-        label: "6. Wycena i cennik 💰"
+        label: "7. Wycena i cennik 💰"
         file: src/_data/wycena.json
         fields:
           - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
@@ -231,7 +262,7 @@ collections:
 
       # ---------- 7. OPINIE ----------
       - name: opinie
-        label: "7. Opinie klientów ⭐"
+        label: "8. Opinie klientów ⭐"
         file: src/_data/opinie.json
         fields:
           - { name: pokaz_sekcje, label: "Pokazuj sekcję opinii", widget: boolean, default: true }
@@ -253,7 +284,7 @@ collections:
 
       # ---------- 8. FAQ ----------
       - name: faq
-        label: "8. Najczęstsze pytania (FAQ) ❓"
+        label: "9. Najczęstsze pytania (FAQ) ❓"
         file: src/_data/faq.json
         fields:
           - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
@@ -284,12 +315,12 @@ collections:
 
       # ---------- 9. KONTAKT ----------
       - name: kontakt
-        label: "9. Kontakt (teksty i formularz)"
+        label: "10. Kontakt (teksty i formularz)"
         file: src/_data/kontakt.json
         fields:
           - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
           - { name: naglowek, label: "Tytuł sekcji", widget: string }
-          - { name: opis, label: "Tekst pod tytułem", widget: text, hint: "Telefon, e-mail, adres i godziny zmieniasz w menu „Telefon, adres i godziny”." }
+          - { name: opis, label: "Tekst pod tytułem", widget: text, hint: "Telefon, e-mail, adres i godziny zmieniasz w menu „Logo, telefon, adres i godziny”." }
           - { name: formularz_tytul, label: "Tytuł formularza", widget: string }
           - { name: formularz_przycisk, label: "Napis na przycisku formularza", widget: string }
 

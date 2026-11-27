@@ -2,8 +2,12 @@
     <div class="container footer__grid">
       <div>
         <a href="#top" class="logo logo--light">
+          {%- if firma.logo_jasne %}
+          <img class="logo__img" src="{{ firma.logo_jasne }}" alt="{{ firma.nazwa }}" height="44">
+          {%- else %}
           <span class="logo__mark" aria-hidden="true">F</span>
           <span class="logo__text">Fortika<small>Biuro Rachunkowe</small></span>
+          {%- endif %}
         </a>
         <p class="footer__about">{{ firma.opis_stopka }}</p>
         {%- if firma.facebook %}

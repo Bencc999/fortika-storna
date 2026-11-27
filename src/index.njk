@@ -23,7 +23,11 @@ permalink: index.html
   <meta property="og:image" content="{{ seo.og_obraz | absoluteUrl(seo.adres_strony) }}">
   {%- endif %}
 
+  {%- if firma.favicon %}
+  <link rel="icon" href="{{ firma.favicon }}">
+  {%- else %}
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2a44'/%3E%3Cpath d='M20 46V18h24v6H27v6h14v6H27v10z' fill='%23e0a43b'/%3E%3C/svg%3E">
+  {%- endif %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,8 +61,12 @@ permalink: index.html
   <header class="header" id="top">
     <div class="container header__inner">
       <a href="#top" class="logo" aria-label="Fortika – strona główna">
+        {%- if firma.logo %}
+        <img class="logo__img" src="{{ firma.logo }}" alt="{{ firma.nazwa }}" height="44">
+        {%- else %}
         <span class="logo__mark" aria-hidden="true">F</span>
         <span class="logo__text">Fortika<small>Biuro Rachunkowe</small></span>
+        {%- endif %}
       </a>
 
       <nav class="nav" id="nav" aria-label="Główna nawigacja">
@@ -264,6 +272,70 @@ permalink: index.html
         </ul>
       </div>
     </section>
+
+    {%- if zespol.pokaz_sekcje %}
+
+    <!-- ============ ZESPÓŁ ============ -->
+    <section class="section section--tint" id="zespol">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">{{ zespol.nadtytul }}</p>
+          <h2>{{ zespol.naglowek }}</h2>
+          {%- if zespol.opis %}
+          <p>{{ zespol.opis }}</p>
+          {%- endif %}
+        </header>
+
+        {%- if zespol.zdjecie_zespolu %}
+        <figure class="team-photo reveal">
+          <img src="{{ zespol.zdjecie_zespolu }}" alt="{{ zespol.zdjecie_zespolu_opis }}" width="1600" height="686" loading="lazy">
+          {%- if zespol.zdjecie_zespolu_podpis %}
+          <figcaption>{{ zespol.zdjecie_zespolu_podpis }}</figcaption>
+          {%- endif %}
+        </figure>
+        {%- endif %}
+
+        <div class="team">
+          {%- for o in zespol.osoby %}
+          <article class="person reveal">
+            {%- if o.zdjecie %}
+            <img class="person__photo" src="{{ o.zdjecie }}" alt="{{ o.imie }}" width="480" height="600" loading="lazy">
+            {%- else %}
+            <div class="person__photo person__photo--empty" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+            </div>
+            {%- endif %}
+            <div class="person__body">
+              <h3 class="person__name">{{ o.imie }}</h3>
+              {%- if o.stanowisko %}<p class="person__role">{{ o.stanowisko }}</p>{% endif %}
+              {%- if o.opis %}<p class="person__bio">{{ o.opis }}</p>{% endif %}
+              {%- if o.email or o.telefon %}
+              <p class="person__contact">
+                {%- if o.email %}<a href="mailto:{{ o.email }}">{{ o.email }}</a>{% endif %}
+                {%- if o.telefon %}<a href="tel:{{ o.telefon | telHref }}">{{ o.telefon }}</a>{% endif %}
+              </p>
+              {%- endif %}
+            </div>
+          </article>
+          {%- else %}
+          {#- Brak osób w panelu: pokazujemy ramki zastępcze. -#}
+          {%- for i in range(3) %}
+          <article class="person person--placeholder reveal">
+            <div class="person__photo person__photo--empty">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+              <span>Miejsce na zdjęcie</span>
+            </div>
+            <div class="person__body">
+              <h3 class="person__name">[Imię i nazwisko]</h3>
+              <p class="person__role">[Stanowisko]</p>
+            </div>
+          </article>
+          {%- endfor %}
+          {%- endfor %}
+        </div>
+      </div>
+    </section>
+    {%- endif %}
 
     <!-- ============ 5. JAK ZACZĄĆ ============ -->
     <section class="section section--dark" id="jak-zaczac">

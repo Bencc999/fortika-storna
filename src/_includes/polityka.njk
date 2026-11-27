@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ tytul }} – Biuro Rachunkowe Fortika</title>
   <meta name="robots" content="noindex, follow">
+  {%- if firma.favicon %}
+  <link rel="icon" href="{{ firma.favicon }}">
+  {%- endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -21,8 +24,12 @@
   <header class="header is-scrolled">
     <div class="container header__inner">
       <a href="index.html" class="logo">
+        {%- if firma.logo %}
+        <img class="logo__img" src="{{ firma.logo }}" alt="{{ firma.nazwa }}" height="44">
+        {%- else %}
         <span class="logo__mark" aria-hidden="true">F</span>
         <span class="logo__text">Fortika<small>Biuro Rachunkowe</small></span>
+        {%- endif %}
       </a>
       <a href="index.html" class="btn btn--ghost btn--sm">← Strona główna</a>
     </div>
