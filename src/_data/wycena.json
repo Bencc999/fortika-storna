@@ -1,0 +1,14 @@
+{
+  "nadtytul": "Wycena",
+  "naglowek": "Ile kosztuje obsługa księgowa?",
+  "opis": "Cena zależy głównie od formy działalności, liczby dokumentów i liczby pracowników. Podaj kilka informacji, a przygotujemy dla Ciebie konkretną ofertę, bez zobowiązań.",
+  "pokaz_cennik": true,
+  "cennik": [
+    { "nazwa": "Ryczałt / KPiR", "cena": "od [__] zł netto/mies." },
+    { "nazwa": "Pełna księgowość", "cena": "od [__] zł netto/mies." },
+    { "nazwa": "Kadry i płace", "cena": "od [__] zł / pracownik" }
+  ],
+  "uwaga": "Ceny orientacyjne. Ostateczna kwota zależy od zakresu obsługi.",
+  "formularz_tytul": "Formularz wyceny",
+  "formularz_przycisk": "Wyślij zapytanie o wycenę"
+}

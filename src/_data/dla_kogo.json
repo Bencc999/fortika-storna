@@ -1,0 +1,18 @@
+{
+  "nadtytul": "Dla kogo",
+  "naglowek": "Pracujemy z firmami na każdym etapie",
+  "opis": "",
+  "formy_tytul": "Formy prawne",
+  "formy": [
+    { "nazwa": "JDG", "opis": "Jednoosobowe działalności gospodarcze: KPiR, ryczałt, podatek liniowy" },
+    { "nazwa": "Spółki z o.o.", "opis": "Pełna księgowość, sprawozdania finansowe, CIT i estoński CIT" },
+    { "nazwa": "Spółki cywilne", "opis": "Rozliczenia wspólników i bieżąca ewidencja" },
+    { "nazwa": "Inne spółki handlowe", "opis": "Spółki jawne, komandytowe i partnerskie" }
+  ],
+  "branze_tytul": "Branże",
+  "branze": [
+    { "nazwa": "Handel", "opis": "Sklepy stacjonarne, e-commerce, hurt, import i eksport", "ikona": "koszyk" },
+    { "nazwa": "Usługi", "opis": "IT, budownictwo, transport, gastronomia, wolne zawody", "ikona": "teczka" },
+    { "nazwa": "Produkcja", "opis": "Rozliczanie kosztów, środki trwałe, magazyn", "ikona": "fabryka" }
+  ]
+}

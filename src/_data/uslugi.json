@@ -1,0 +1,37 @@
+{
+  "nadtytul": "Usługi",
+  "naglowek": "Wszystko, czego potrzebuje Twoja firma, w jednym miejscu",
+  "opis": "Od pierwszej faktury po roczne sprawozdanie. Zajmujemy się księgowością, kadrami i rozliczeniami z urzędami.",
+  "uslugi": [
+    {
+      "nazwa": "Pełna księgowość i KPiR",
+      "opis": "Księgi handlowe dla spółek oraz podatkowa księga przychodów i rozchodów dla JDG. Sprawozdania finansowe i rozliczenia roczne.",
+      "ikona": "ksiega"
+    },
+    {
+      "nazwa": "Ryczałt",
+      "opis": "Ewidencja przychodów, dobór właściwej stawki i comiesięczne wyliczenie podatku. Podpowiemy też, czy ryczałt się Tobie opłaca.",
+      "ikona": "procent"
+    },
+    {
+      "nazwa": "Kadry i płace",
+      "opis": "Listy płac, umowy, akta osobowe, urlopy i zwolnienia. Obsługujemy umowy o pracę, zlecenia i o dzieło.",
+      "ikona": "ludzie"
+    },
+    {
+      "nazwa": "Rozliczenia z US, ZUS i GUS",
+      "opis": "Deklaracje podatkowe, VAT, PIT, CIT, ZUS i sprawozdania GUS. Składamy wszystko w terminie, w Twoim imieniu.",
+      "ikona": "urzad"
+    },
+    {
+      "nazwa": "JPK i KSeF",
+      "opis": "Pliki JPK_V7 i obsługa Krajowego Systemu e-Faktur. Pomożemy przygotować firmę na e-fakturowanie bez nerwów.",
+      "ikona": "dokument"
+    },
+    {
+      "nazwa": "Doradztwo dla firm",
+      "opis": "Wybór formy działalności i opodatkowania przy zakładaniu firmy oraz wsparcie, gdy firma rośnie, zatrudnia albo zmienia formę prawną.",
+      "ikona": "gwiazda"
+    }
+  ]
+}

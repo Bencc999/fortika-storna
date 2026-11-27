@@ -1,0 +1,32 @@
+<footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a href="#top" class="logo logo--light">
+          <span class="logo__mark" aria-hidden="true">F</span>
+          <span class="logo__text">Fortika<small>Biuro Rachunkowe</small></span>
+        </a>
+        <p class="footer__about">{{ firma.opis_stopka }}</p>
+        {%- if firma.facebook %}
+        <a class="footer__social" href="{{ firma.facebook }}" target="_blank" rel="noopener" aria-label="Fortika na Facebooku">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8z"/></svg>
+          Facebook
+        </a>
+        {%- endif %}
+      </div>
+      <div>
+        <h4>Dane rejestrowe</h4>
+        <p>{{ firma.nazwa }}<br>{{ firma.ulica }}<br>{{ firma.kod_pocztowy }} {{ firma.miasto }}</p>
+        <p>NIP {{ firma.nip }}<br>KRS {{ firma.krs }}<br>REGON {{ firma.regon }}</p>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <p><a href="mailto:{{ firma.email }}">{{ firma.email }}</a><br><a href="tel:{{ firma.telefon | telHref }}">{{ firma.telefon }}</a></p>
+        <h4>Na skróty</h4>
+        <p><a href="#uslugi">Usługi</a> · <a href="#wycena">Wycena</a> · <a href="#faq">FAQ</a></p>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>© <span id="year">{{ rok }}</span> {{ firma.nazwa }}</span>
+      <a href="polityka-prywatnosci.html">Polityka prywatności (RODO)</a>
+    </div>
+  </footer>

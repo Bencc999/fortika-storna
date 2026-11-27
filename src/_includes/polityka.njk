@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ tytul }} – Biuro Rachunkowe Fortika</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { padding-bottom: 0; }
+    .legal { max-width: 760px; padding-top: 3rem; padding-bottom: 5rem; }
+    .legal h2 { font-size: 1.3rem; margin-top: 2.2rem; }
+    .legal p, .legal li { color: #3d4a59; }
+    .legal .todo { background: var(--gold-50); border-left: 4px solid var(--gold); padding: 1rem 1.2rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <header class="header is-scrolled">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__mark" aria-hidden="true">F</span>
+        <span class="logo__text">Fortika<small>Biuro Rachunkowe</small></span>
+      </a>
+      <a href="index.html" class="btn btn--ghost btn--sm">← Strona główna</a>
+    </div>
+  </header>
+
+  <main class="container legal">
+    <p class="eyebrow">RODO</p>
+    <h1>{{ tytul }}</h1>
+    {%- if wzor %}
+    <p class="todo"><strong>Wzór do weryfikacji.</strong> Treść ma charakter ogólny. Przed publikacją sprawdź ją z osobą odpowiedzialną za ochronę danych lub prawnikiem i dopasuj do faktycznie używanych narzędzi (hosting, poczta, analityka, formularze).</p>
+    {%- endif %}
+
+    {{ content | safe }}
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__bottom" style="margin-top:0;border:0;padding-top:0">
+      <span>© {{ rok }} {{ firma.nazwa }}</span>
+      <a href="index.html">Strona główna</a>
+    </div>
+  </footer>
+</body>
+</html>

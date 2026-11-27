@@ -1,0 +1,505 @@
+---
+permalink: index.html
+---
+{#- Treści pochodzą z plików src/_data/*.json, edytowanych w panelu /admin. -#}
+{%- set tel = firma.telefon | telHref -%}
+{%- set adres = firma.ulica + ", " + firma.kod_pocztowy + " " + firma.miasto -%}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo.tytul }}</title>
+  <meta name="description" content="{{ seo.opis }}">
+  <link rel="canonical" href="{{ seo.adres_strony }}">
+  <meta name="theme-color" content="#0f2a44">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:title" content="{{ seo.og_tytul }}">
+  <meta property="og:description" content="{{ seo.og_opis }}">
+  <meta property="og:url" content="{{ seo.adres_strony }}">
+  {%- if seo.og_obraz %}
+  <meta property="og:image" content="{{ seo.og_obraz | absoluteUrl(seo.adres_strony) }}">
+  {%- endif %}
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2a44'/%3E%3Cpath d='M20 46V18h24v6H27v6h14v6H27v10z' fill='%23e0a43b'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": {{ firma.nazwa | dump | safe }},
+    "url": {{ seo.adres_strony | dump | safe }},
+    "email": {{ firma.email | dump | safe }},
+    "telephone": {{ tel | dump | safe }},
+    "taxID": {{ firma.nip | dump | safe }},
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": {{ firma.ulica | dump | safe }},
+      "postalCode": {{ firma.kod_pocztowy | dump | safe }},
+      "addressLocality": {{ firma.miasto | dump | safe }},
+      "addressCountry": "PL"
+    },
+    "areaServed": "PL"
+  }
+  </script>
+</head>
+<body data-email="{{ firma.email }}">
+  <a class="skip-link" href="#main">Przejdź do treści</a>
+
+  <!-- ============ NAGŁÓWEK ============ -->
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a href="#top" class="logo" aria-label="Fortika – strona główna">
+        <span class="logo__mark" aria-hidden="true">F</span>
+        <span class="logo__text">Fortika<small>Biuro Rachunkowe</small></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Główna nawigacja">
+        <ul class="nav__list">
+          <li><a href="#uslugi">Usługi</a></li>
+          <li><a href="#dla-kogo">Dla kogo</a></li>
+          <li><a href="#dlaczego">Dlaczego my</a></li>
+          <li><a href="#wycena">Wycena</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <a href="#wycena" class="btn btn--primary btn--sm nav__cta">Wyceń obsługę</a>
+      </nav>
+
+      <a href="tel:{{ tel }}" class="header__phone" aria-label="Zadzwoń do biura">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+        <span>{{ firma.telefon }}</span>
+      </a>
+
+      <button class="burger" id="burger" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="eyebrow">{{ hero.nadtytul }}</p>
+          <h1>{{ hero.naglowek }} <span class="accent">{{ hero.naglowek_wyrozniony }}</span></h1>
+          <p class="hero__lead">{{ hero.opis }}</p>
+          <div class="hero__actions">
+            <a href="#kontakt" class="btn btn--primary btn--lg">{{ hero.przycisk_glowny }}</a>
+            <a href="#wycena" class="btn btn--ghost btn--lg">{{ hero.przycisk_drugi }}</a>
+          </div>
+          <a href="tel:{{ tel }}" class="hero__phone">
+            <span class="hero__phone-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+            </span>
+            <span>{{ hero.zacheta_telefon }}<strong> {{ firma.telefon }}</strong></span>
+          </a>
+          {%- if hero.wyrozniki and hero.wyrozniki.length %}
+          <ul class="hero__badges">
+            {%- for w in hero.wyrozniki %}
+            <li>{{ w }}</li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+        </div>
+
+        {% if hero.obraz -%}
+        <div class="hero__art hero__art--photo">
+          <img src="{{ hero.obraz }}" alt="" width="920" height="800">
+        </div>
+        {%- else -%}
+        <!-- Ilustracja (SVG, bez zdjęć stockowych) -->
+        <div class="hero__art" aria-hidden="true">
+          <svg viewBox="0 0 480 420" class="illustration">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#d6e1ee"/>
+              </linearGradient>
+            </defs>
+            <circle cx="250" cy="210" r="190" fill="url(#g1)"/>
+            <!-- dokument -->
+            <g class="float-a">
+              <rect x="110" y="70" width="200" height="260" rx="16" fill="#fff" stroke="#0f2a44" stroke-opacity=".08"/>
+              <rect x="134" y="100" width="90" height="12" rx="6" fill="#0f2a44"/>
+              <rect x="134" y="126" width="150" height="8" rx="4" fill="#c9d4e2"/>
+              <rect x="134" y="144" width="130" height="8" rx="4" fill="#c9d4e2"/>
+              <rect x="134" y="180" width="152" height="1.5" fill="#e3e9f1"/>
+              <rect x="134" y="196" width="70" height="8" rx="4" fill="#c9d4e2"/>
+              <rect x="246" y="196" width="40" height="8" rx="4" fill="#0f2a44" opacity=".7"/>
+              <rect x="134" y="216" width="80" height="8" rx="4" fill="#c9d4e2"/>
+              <rect x="246" y="216" width="40" height="8" rx="4" fill="#0f2a44" opacity=".7"/>
+              <rect x="134" y="236" width="60" height="8" rx="4" fill="#c9d4e2"/>
+              <rect x="246" y="236" width="40" height="8" rx="4" fill="#0f2a44" opacity=".7"/>
+              <rect x="134" y="270" width="152" height="34" rx="8" fill="#fdf3e1"/>
+              <rect x="146" y="283" width="60" height="8" rx="4" fill="#e0a43b"/>
+              <rect x="240" y="281" width="36" height="12" rx="4" fill="#0f2a44"/>
+            </g>
+            <!-- wykres -->
+            <g class="float-b">
+              <rect x="270" y="190" width="170" height="130" rx="16" fill="#0f2a44"/>
+              <rect x="294" y="268" width="18" height="30" rx="4" fill="#3d5a7a"/>
+              <rect x="322" y="250" width="18" height="48" rx="4" fill="#3d5a7a"/>
+              <rect x="350" y="236" width="18" height="62" rx="4" fill="#3d5a7a"/>
+              <rect x="378" y="214" width="18" height="84" rx="4" fill="#e0a43b"/>
+              <rect x="294" y="208" width="54" height="8" rx="4" fill="#fff" opacity=".85"/>
+            </g>
+            <!-- checkmark -->
+            <g class="float-c">
+              <circle cx="330" cy="104" r="40" fill="#e0a43b"/>
+              <path d="M313 105l12 12 22-24" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <!-- kalendarz -->
+            <g class="float-a">
+              <rect x="60" y="250" width="96" height="90" rx="14" fill="#fff" stroke="#0f2a44" stroke-opacity=".08"/>
+              <rect x="60" y="250" width="96" height="26" rx="14" fill="#1f4670"/>
+              <rect x="60" y="264" width="96" height="12" fill="#1f4670"/>
+              <text x="108" y="320" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800" font-size="30" fill="#0f2a44">20</text>
+            </g>
+          </svg>
+        </div>
+        {%- endif %}
+      </div>
+    </section>
+
+    <!-- ============ 2. USŁUGI ============ -->
+    <section class="section" id="uslugi">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">{{ uslugi.nadtytul }}</p>
+          <h2>{{ uslugi.naglowek }}</h2>
+          {%- if uslugi.opis %}
+          <p>{{ uslugi.opis }}</p>
+          {%- endif %}
+        </header>
+
+        <div class="cards">
+          {%- for u in uslugi.uslugi %}
+          <article class="card reveal">
+            <div class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">{{ ikony[u.ikona] | safe }}</svg>
+            </div>
+            <h3>{{ u.nazwa }}</h3>
+            <p>{{ u.opis }}</p>
+          </article>
+          {%- endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. DLA KOGO ============ -->
+    <section class="section section--tint" id="dla-kogo">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">{{ dla_kogo.nadtytul }}</p>
+          <h2>{{ dla_kogo.naglowek }}</h2>
+          {%- if dla_kogo.opis %}
+          <p>{{ dla_kogo.opis }}</p>
+          {%- endif %}
+        </header>
+
+        <div class="audience">
+          <div class="audience__col reveal">
+            <h3>{{ dla_kogo.formy_tytul }}</h3>
+            <ul class="tiles">
+              {%- for f in dla_kogo.formy %}
+              <li class="tile"><strong>{{ f.nazwa }}</strong><span>{{ f.opis }}</span></li>
+              {%- endfor %}
+            </ul>
+          </div>
+          <div class="audience__col reveal">
+            <h3>{{ dla_kogo.branze_tytul }}</h3>
+            <ul class="tiles">
+              {%- for b in dla_kogo.branze %}
+              <li class="tile tile--ind"><span class="tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24">{{ ikony[b.ikona] | safe }}</svg></span><strong>{{ b.nazwa }}</strong><span>{{ b.opis }}</span></li>
+              {%- endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. DLACZEGO FORTIKA ============ -->
+    <section class="section" id="dlaczego">
+      <div class="container why">
+        <div class="why__intro reveal">
+          <p class="eyebrow">{{ dlaczego.nadtytul }}</p>
+          <h2>{{ dlaczego.naglowek }}</h2>
+          <p>{{ dlaczego.opis }}</p>
+
+          <figure class="photo-slot">
+            {%- if dlaczego.zdjecie %}
+            <img class="photo-slot__img" src="{{ dlaczego.zdjecie }}" alt="{{ dlaczego.zdjecie_opis }}" width="1200" height="800" loading="lazy">
+            {%- else %}
+            <div class="photo-slot__box">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg>
+              <span>Miejsce na zdjęcie zespołu lub biura<br><small>(np. img/zespol.jpg, 1200×800 px)</small></span>
+            </div>
+            {%- endif %}
+            {%- if dlaczego.zdjecie_podpis %}
+            <figcaption>{{ dlaczego.zdjecie_podpis }}</figcaption>
+            {%- endif %}
+          </figure>
+        </div>
+
+        <ul class="why__list">
+          {%- for a in dlaczego.atuty %}
+          <li class="why__item reveal">
+            {%- if a.liczba %}
+            <span class="why__num">{{ a.liczba }}</span>
+            {%- else %}
+            <span class="why__ico" aria-hidden="true"><svg viewBox="0 0 24 24">{{ ikony[a.ikona] | safe }}</svg></span>
+            {%- endif %}
+            <div><h3>{{ a.tytul }}</h3><p>{{ a.opis }}</p></div>
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 5. JAK ZACZĄĆ ============ -->
+    <section class="section section--dark" id="jak-zaczac">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow eyebrow--light">{{ kroki.nadtytul }}</p>
+          <h2>{{ kroki.naglowek }}</h2>
+          {%- if kroki.opis %}
+          <p>{{ kroki.opis }}</p>
+          {%- endif %}
+        </header>
+        <ol class="steps">
+          {%- for k in kroki.kroki %}
+          <li class="step reveal"><span class="step__n">{{ loop.index }}</span><h3>{{ k.tytul }}</h3><p>{{ k.opis }}</p></li>
+          {%- endfor %}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 6. WYCENA ============ -->
+    <section class="section" id="wycena">
+      <div class="container quote">
+        <div class="quote__intro reveal">
+          <p class="eyebrow">{{ wycena.nadtytul }}</p>
+          <h2>{{ wycena.naglowek }}</h2>
+          <p>{{ wycena.opis }}</p>
+
+          {%- if wycena.pokaz_cennik and wycena.cennik and wycena.cennik.length %}
+          <ul class="price-list">
+            {%- for c in wycena.cennik %}
+            <li><span>{{ c.nazwa }}</span><strong>{{ c.cena }}</strong></li>
+            {%- endfor %}
+          </ul>
+          {%- if wycena.uwaga %}
+          <p class="note">{{ wycena.uwaga }}</p>
+          {%- endif %}
+          {%- endif %}
+        </div>
+
+        <form class="form card-form reveal" id="quoteForm" novalidate>
+          <h3>{{ wycena.formularz_tytul }}</h3>
+          <div class="field">
+            <label for="q-type">Forma działalności</label>
+            <select id="q-type" name="Forma działalności" required>
+              <option value="">Wybierz…</option>
+              <option>Jednoosobowa działalność (JDG)</option>
+              <option>Spółka z o.o.</option>
+              <option>Spółka cywilna</option>
+              <option>Inna spółka handlowa</option>
+              <option>Dopiero zakładam firmę</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="q-tax">Forma opodatkowania</label>
+            <select id="q-tax" name="Forma opodatkowania" required>
+              <option value="">Wybierz…</option>
+              <option>Ryczałt</option>
+              <option>Skala podatkowa (KPiR)</option>
+              <option>Podatek liniowy (KPiR)</option>
+              <option>Pełna księgowość (CIT)</option>
+              <option>Estoński CIT</option>
+              <option>Nie wiem, potrzebuję porady</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="q-docs">Dokumenty miesięcznie</label>
+              <select id="q-docs" name="Liczba dokumentów" required>
+                <option value="">Wybierz…</option>
+                <option>do 20</option>
+                <option>21–50</option>
+                <option>51–100</option>
+                <option>101–200</option>
+                <option>powyżej 200</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="q-emp">Liczba pracowników</label>
+              <input type="number" id="q-emp" name="Liczba pracowników" min="0" value="0" inputmode="numeric">
+            </div>
+          </div>
+          <div class="field">
+            <label class="check"><input type="checkbox" name="VAT" value="tak"> Jestem czynnym podatnikiem VAT</label>
+          </div>
+          <div class="field">
+            <label for="q-email">Twój e-mail lub telefon</label>
+            <input type="text" id="q-email" name="Kontakt" required autocomplete="email" placeholder="np. jan@firma.pl">
+          </div>
+          <div class="field">
+            <label class="check check--small">
+              <input type="checkbox" name="Zgoda RODO" required>
+              <span>Wyrażam zgodę na przetwarzanie moich danych w celu przygotowania wyceny. <a href="polityka-prywatnosci.html">Polityka prywatności</a></span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">{{ wycena.formularz_przycisk }}</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    {%- if opinie.pokaz_sekcje %}
+
+    <!-- ============ 7. OPINIE ============ -->
+    <section class="section section--tint" id="opinie">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">{{ opinie.nadtytul }}</p>
+          <h2>{{ opinie.naglowek }}</h2>
+        </header>
+        <div class="reviews">
+          {%- for o in opinie.opinie %}
+          <figure class="review reveal">
+            <blockquote>{{ o.tresc }}</blockquote>
+            <figcaption>
+              {%- if o.zdjecie %}<img class="review__photo" src="{{ o.zdjecie }}" alt="" width="48" height="48" loading="lazy">{% endif -%}
+              <strong>{{ o.autor }}</strong>{% if o.firma %}<span>{{ o.firma }}</span>{% endif %}</figcaption>
+          </figure>
+          {%- else %}
+          {#- Brak opinii w panelu: pokazujemy ramki zastępcze. -#}
+          {%- for i in range(3) %}
+          <figure class="review review--placeholder reveal">
+            <blockquote>[Miejsce na prawdziwą opinię klienta]</blockquote>
+            <figcaption><strong>[Imię i nazwisko]</strong><span>[Firma, branża]</span></figcaption>
+          </figure>
+          {%- endfor %}
+          {%- endfor %}
+        </div>
+      </div>
+    </section>
+    {%- endif %}
+
+    <!-- ============ 8. FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="container faq">
+        <header class="section__head section__head--left reveal">
+          <p class="eyebrow">{{ faq.nadtytul }}</p>
+          <h2>{{ faq.naglowek }}</h2>
+          {%- if faq.opis %}
+          {{ faq.opis | md | safe }}
+          {%- endif %}
+        </header>
+        <div class="faq__list reveal">
+          {%- for p in faq.pytania %}
+          <details>
+            <summary>{{ p.pytanie }}</summary>
+            {{ p.odpowiedz | md | safe }}
+          </details>
+          {%- endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. KONTAKT ============ -->
+    <section class="section section--tint" id="kontakt">
+      <div class="container contact">
+        <div class="contact__info reveal">
+          <p class="eyebrow">{{ kontakt.nadtytul }}</p>
+          <h2>{{ kontakt.naglowek }}</h2>
+          <p>{{ kontakt.opis }}</p>
+
+          <ul class="contact__list">
+            <li>
+              <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span>
+              <div><small>Telefon</small><a href="tel:{{ tel }}">{{ firma.telefon }}</a></div>
+            </li>
+            <li>
+              <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+              <div><small>E-mail</small><a href="mailto:{{ firma.email }}">{{ firma.email }}</a></div>
+            </li>
+            <li>
+              <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <div><small>Adres</small><address>{{ firma.ulica }}<br>{{ firma.kod_pocztowy }} {{ firma.miasto }}{% if firma.dzielnica %} ({{ firma.dzielnica }}){% endif %}</address></div>
+            </li>
+            {%- if firma.godziny %}
+            <li>
+              <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+              <div><small>Godziny pracy</small><span>{{ firma.godziny }}</span></div>
+            </li>
+            {%- endif %}
+          </ul>
+
+          <div class="map" id="map" data-address="{{ adres }}">
+            <button type="button" class="map__load" id="mapLoad">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span><strong>Pokaż mapę Google</strong><small>Po kliknięciu załadujemy mapę z serwerów Google.</small></span>
+            </button>
+          </div>
+          <a class="map__link" href="https://www.google.com/maps/search/?api=1&amp;query={{ adres | urlencode }}" target="_blank" rel="noopener">Otwórz w Mapach Google →</a>
+        </div>
+
+        <form class="form card-form reveal" id="contactForm" novalidate>
+          <h3>{{ kontakt.formularz_tytul }}</h3>
+          <div class="field">
+            <label for="c-name">Imię i nazwisko</label>
+            <input type="text" id="c-name" name="Imię i nazwisko" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="c-company">Nazwa firmy <span class="opt">(opcjonalnie)</span></label>
+            <input type="text" id="c-company" name="Firma" autocomplete="organization">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="c-email">E-mail</label>
+              <input type="email" id="c-email" name="E-mail" required autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="c-phone">Telefon <span class="opt">(opcjonalnie)</span></label>
+              <input type="tel" id="c-phone" name="Telefon" autocomplete="tel">
+            </div>
+          </div>
+          <div class="field">
+            <label for="c-msg">Wiadomość</label>
+            <textarea id="c-msg" name="Wiadomość" rows="4" required placeholder="Np. prowadzę JDG na ryczałcie, ok. 30 faktur miesięcznie, chcę zmienić biuro…"></textarea>
+          </div>
+          <div class="field">
+            <label class="check check--small">
+              <input type="checkbox" name="Zgoda RODO" required>
+              <span>Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie. <a href="polityka-prywatnosci.html">Polityka prywatności</a></span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">{{ kontakt.formularz_przycisk }}</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 10. STOPKA ============ -->
+  {% include "stopka.njk" %}
+
+  <!-- Pasek CTA na telefonach -->
+  <div class="mobile-cta">
+    <a href="tel:{{ tel }}" class="btn btn--ghost-light">Zadzwoń</a>
+    <a href="#kontakt" class="btn btn--primary">Bezpłatna konsultacja</a>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

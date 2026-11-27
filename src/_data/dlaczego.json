@@ -1,0 +1,40 @@
+{
+  "nadtytul": "Dlaczego Fortika",
+  "naglowek": "Biuro, któremu możesz zaufać",
+  "opis": "Od ponad 10 lat prowadzimy księgowość firm handlowych, usługowych i produkcyjnych z całej Polski. Stawiamy na stały kontakt i jasną komunikację, bez żargonu.",
+  "zdjecie": "",
+  "zdjecie_opis": "Zespół biura rachunkowego Fortika",
+  "zdjecie_podpis": "Nasze biuro przy ul. Narutowicza 7/9 w Łodzi",
+  "atuty": [
+    {
+      "tytul": "Lat doświadczenia",
+      "opis": "Znamy przepisy i wiemy, jak zmieniały się przez ostatnią dekadę. Twoja firma korzysta z tej wiedzy na co dzień.",
+      "liczba": "10+",
+      "ikona": "zegar"
+    },
+    {
+      "tytul": "Stały opiekun",
+      "opis": "Masz jedną osobę, która zna Twoją firmę. Nie musisz za każdym razem tłumaczyć wszystkiego od nowa.",
+      "liczba": "",
+      "ikona": "osoba"
+    },
+    {
+      "tytul": "Terminowość",
+      "opis": "Pilnujemy kalendarza podatkowego i przypominamy o płatnościach z wyprzedzeniem.",
+      "liczba": "",
+      "ikona": "zegar"
+    },
+    {
+      "tytul": "Obsługa zdalna w całej Polsce",
+      "opis": "Dokumenty przesyłasz online, a sprawy załatwiamy mailowo i telefonicznie. Nie musisz przyjeżdżać do biura.",
+      "liczba": "",
+      "ikona": "globus"
+    },
+    {
+      "tytul": "Biuro w centrum Łodzi",
+      "opis": "Możesz też spotkać się z nami osobiście przy ul. Narutowicza, kilka minut od Piotrkowskiej.",
+      "liczba": "",
+      "ikona": "pinezka"
+    }
+  ]
+}

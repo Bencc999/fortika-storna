@@ -1,0 +1,31 @@
+{
+  "nadtytul": "FAQ",
+  "naglowek": "Najczęstsze pytania",
+  "opis": "Nie znalazłeś odpowiedzi? [Napisz do nas](#kontakt), chętnie pomożemy.",
+  "pytania": [
+    {
+      "pytanie": "Jak przekazać dokumenty do biura?",
+      "odpowiedz": "Najwygodniej elektronicznie: mailem, przez dysk w chmurze albo bezpośrednio z Twojego systemu do fakturowania. Faktury z KSeF pobieramy sami. Dokumenty papierowe możesz przynieść do biura przy ul. Narutowicza 7/9 albo wysłać pocztą lub kurierem."
+    },
+    {
+      "pytanie": "Czy obsługujecie firmy zdalnie, spoza Łodzi?",
+      "odpowiedz": "Tak. Obsługujemy klientów z całej Polski. Umowę można podpisać elektronicznie, dokumenty przesyłasz online, a sprawy omawiamy telefonicznie, mailowo lub na wideorozmowie."
+    },
+    {
+      "pytanie": "Ile kosztuje zmiana biura rachunkowego?",
+      "odpowiedz": "Po naszej stronie przejęcie księgowości nie wiąże się z dodatkową opłatą. Sprawdź tylko okres wypowiedzenia w umowie z obecnym biurem. Pomożemy zaplanować przejście tak, żeby nie wypadł żaden termin."
+    },
+    {
+      "pytanie": "Od kiedy możecie przejąć moją księgowość?",
+      "odpowiedz": "Najczęściej od początku kolejnego miesiąca. Najprościej zmienić biuro od nowego roku podatkowego, ale da się to zrobić w dowolnym momencie."
+    },
+    {
+      "pytanie": "Czy pomożecie założyć firmę?",
+      "odpowiedz": "Tak. Doradzimy wybór formy prawnej i formy opodatkowania, pomożemy z wpisem do CEIDG lub KRS i zgłoszeniami do US i ZUS."
+    },
+    {
+      "pytanie": "Czy obsługujecie KSeF?",
+      "odpowiedz": "Tak. Pomagamy przygotować firmę do Krajowego Systemu e-Faktur, nadać uprawnienia i ułożyć obieg faktur."
+    }
+  ]
+}

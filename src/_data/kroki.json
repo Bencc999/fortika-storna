@@ -1,0 +1,11 @@
+{
+  "nadtytul": "Jak zacząć współpracę",
+  "naglowek": "Cztery proste kroki",
+  "opis": "Przejście do nas jest prostsze, niż się wydaje. Formalności z poprzednim biurem pomożemy załatwić.",
+  "kroki": [
+    { "tytul": "Kontakt", "opis": "Zadzwoń, napisz albo wypełnij formularz. Odezwiemy się zwykle w ciągu jednego dnia roboczego." },
+    { "tytul": "Wycena", "opis": "Na bezpłatnej konsultacji poznajemy Twoją firmę i przygotowujemy indywidualną ofertę." },
+    { "tytul": "Umowa", "opis": "Podpisujemy umowę, także zdalnie. Ustalamy zakres obsługi i sposób przekazywania dokumentów." },
+    { "tytul": "Przekazanie dokumentów", "opis": "Przejmujemy dokumentację i od tej chwili Twoja księgowość jest w naszych rękach." }
+  ]
+}

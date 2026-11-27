@@ -1,0 +1,16 @@
+{
+  "name": "fortika-strona",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Strona Biura Rachunkowego Fortika (Eleventy + Decap CMS)",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "cms": "decap-server"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "markdown-it": "^14.1.0"
+  }
+}
