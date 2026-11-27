@@ -1,19 +1,27 @@
 # =========================================================
 #  Panel treści (Decap CMS) – Biuro Rachunkowe Fortika
-#  Adres panelu: https://TWOJA-DOMENA/admin/
+#  Adres panelu: https://fortika-storna.netlify.app/admin/
 # =========================================================
 
 backend:
   name: github
   repo: Bencc999/fortika-storna   # repozytorium na GitHubie (login/nazwa)
   branch: main
+  commit_messages:
+    create: "Panel: dodano {{collection}} „{{slug}}”"
+    update: "Panel: zmiana – {{slug}}"
+    delete: "Panel: usunięto {{collection}} „{{slug}}”"
+    uploadMedia: "Panel: wgrano zdjęcie {{path}}"
+    deleteMedia: "Panel: usunięto zdjęcie {{path}}"
 
 # Pozwala edytować treści lokalnie (npx decap-server) bez logowania do GitHuba.
 local_backend: true
 
 locale: pl
-site_url: https://fortika.pl
-display_url: https://fortika.pl
+logo_url: /admin/logo.svg
+# Adres używany w przyciskach „Zobacz na żywo”. Po podpięciu domeny zmień na https://fortika.pl
+site_url: https://fortika-storna.netlify.app
+display_url: https://fortika-storna.netlify.app
 
 # Gdzie zapisują się wgrane zdjęcia
 media_folder: src/img/uploads
@@ -25,52 +33,82 @@ slug:
 
 collections:
 
-  # -------------------------------------------------------
-  - name: strona
-    label: Strona główna
-    label_singular: Sekcja
+  # =======================================================
+  #  1. TELEFON, ADRES I DANE FIRMY – najczęściej zmieniane
+  # =======================================================
+  - name: ustawienia
+    label: "Telefon, adres i godziny"
+    label_singular: "Dane kontaktowe"
     description: >
-      Każda pozycja to jedna sekcja strony głównej, w kolejności od góry.
-      Po zmianie kliknij „Opublikuj”. Strona zaktualizuje się po 1–2 minutach.
-    editor: { preview: false }
+      Numer telefonu, e-mail, adres, godziny pracy i dane rejestrowe.
+      Zmiana tutaj od razu aktualizuje wszystkie miejsca na stronie (nagłówek, baner, kontakt, stopkę).
+    files:
+      - name: firma
+        label: "Dane kontaktowe i rejestrowe firmy"
+        file: src/_data/firma.json
+        fields:
+          - { name: telefon, label: "📞 Numer telefonu", widget: string, hint: "Np. 42 123 45 67 albo +48 600 123 456. Pojawi się w nagłówku, banerze, sekcji Kontakt i stopce. Na telefonie będzie można w niego kliknąć, żeby zadzwonić." }
+          - { name: email, label: "✉️ Adres e-mail", widget: string, hint: "Na ten adres trafiają też wiadomości z formularzy." }
+          - { name: godziny, label: "🕘 Godziny pracy", widget: string, required: false, hint: "Np. pon.–pt.: 8:00–16:00" }
+          - { name: ulica, label: "📍 Ulica i numer", widget: string }
+          - { name: kod_pocztowy, label: "Kod pocztowy", widget: string }
+          - { name: miasto, label: "Miasto", widget: string }
+          - { name: dzielnica, label: "Dzielnica", widget: string, required: false, hint: "Wyświetla się w nawiasie po mieście w sekcji Kontakt." }
+          - { name: facebook, label: "Adres profilu na Facebooku", widget: string, required: false, hint: "Cały adres, np. https://www.facebook.com/fortika. Zostaw puste, żeby ukryć ikonę Facebooka." }
+          - { name: opis_stopka, label: "Krótki opis firmy w stopce", widget: text }
+          - { name: nazwa, label: "Pełna nazwa firmy", widget: string, hint: "Dane rejestrowe poniżej zmieniaj tylko, gdy zmienią się w KRS." }
+          - { name: nip, label: "NIP", widget: string }
+          - { name: krs, label: "KRS", widget: string }
+          - { name: regon, label: "REGON", widget: string }
+
+  # =======================================================
+  #  2. SEKCJE STRONY GŁÓWNEJ
+  # =======================================================
+  - name: strona
+    label: "Sekcje strony głównej"
+    label_singular: "Sekcja"
+    description: >
+      Sekcje w takiej kolejności, w jakiej widać je na stronie, od góry do dołu.
+      Po prawej stronie edytora widzisz podgląd. Na stronie zmiana pojawi się 1–2 minuty po kliknięciu „Opublikuj”.
     files:
 
-      # ---------- 1. HERO ----------
+      # ---------- 1. BANER ----------
       - name: hero
-        label: "1. Baner powitalny (góra strony)"
+        label: "1. Baner na górze strony (duży tytuł i przyciski)"
         file: src/_data/hero.json
         fields:
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string, hint: "Krótki złoty napis wielkimi literami, np. „Biuro rachunkowe w centrum Łodzi”." }
-          - { name: naglowek, label: "Nagłówek – pierwsza część", widget: string, hint: "Zwykły granatowy tekst, np. „Księgowość, o którą”." }
-          - { name: naglowek_wyrozniony, label: "Nagłówek – wyróżniona końcówka", widget: string, hint: "Ta część jest podkreślona złotym paskiem, np. „nie musisz się martwić”." }
-          - { name: opis, label: "Opis pod nagłówkiem", widget: text, hint: "2–3 zdania o tym, co robicie." }
-          - { name: przycisk_glowny, label: "Tekst głównego przycisku (złoty)", widget: string, hint: "Przycisk przenosi do sekcji Kontakt." }
-          - { name: przycisk_drugi, label: "Tekst drugiego przycisku (obramowany)", widget: string, hint: "Przycisk przenosi do sekcji Wycena." }
-          - { name: zacheta_telefon, label: "Tekst przy numerze telefonu", widget: string, hint: "Sam numer zmienisz w „Ustawienia → Dane firmy i kontakt”." }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Duży tytuł – pierwsza część (granatowa)", widget: string, hint: "Np. „Księgowość, o którą”." }
+          - { name: naglowek_wyrozniony, label: "Duży tytuł – końcówka podkreślona na złoto", widget: string, hint: "Np. „nie musisz się martwić”." }
+          - { name: opis, label: "Tekst pod tytułem", widget: text, hint: "2–3 zdania o tym, co robicie." }
+          - { name: przycisk_glowny, label: "Napis na złotym przycisku", widget: string, hint: "Przycisk przenosi do formularza kontaktowego." }
+          - { name: przycisk_drugi, label: "Napis na białym przycisku", widget: string, hint: "Przycisk przenosi do sekcji Wycena." }
+          - { name: zacheta_telefon, label: "Tekst przed numerem telefonu (bez numeru!)", widget: string, hint: "Np. „Wolisz porozmawiać? Zadzwoń:”. Numer dopisuje się sam. Zmieniasz go w menu „Telefon, adres i godziny”." }
           - name: wyrozniki
-            label: "Wyróżniki"
-            label_singular: wyróżnik
+            label: "Plakietki pod przyciskami"
+            label_singular: "plakietkę"
             widget: list
             required: false
-            hint: "Małe plakietki pod przyciskami. Krótkie hasła, np. „Stały opiekun”. Najlepiej 2–4."
-            field: { name: tekst, label: "Treść", widget: string }
-          - { name: obraz, label: "Zdjęcie zamiast ilustracji", widget: image, required: false, choose_url: false, hint: "Zostaw puste, żeby wyświetlała się obecna ilustracja. Najlepiej zdjęcie poziome, ok. 900×800 px." }
+            collapsed: false
+            hint: "Krótkie hasła, np. „Stały opiekun”. Najlepiej 2–4."
+            field: { name: tekst, label: "Treść plakietki", widget: string }
+          - { name: obraz, label: "Zdjęcie zamiast ilustracji", widget: image, required: false, choose_url: false, hint: "Zostaw puste, żeby została obecna ilustracja. Najlepiej zdjęcie ok. 900×800 px." }
 
       # ---------- 2. USŁUGI ----------
       - name: uslugi
-        label: "2. Usługi"
+        label: "2. Usługi (karty z ikonami)"
         file: src/_data/uslugi.json
         fields:
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string }
-          - { name: naglowek, label: "Nagłówek sekcji", widget: string }
-          - { name: opis, label: "Opis pod nagłówkiem", widget: text, required: false }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
+          - { name: opis, label: "Tekst pod tytułem", widget: text, required: false }
           - name: uslugi
-            label: "Usługi (karty)"
-            label_singular: usługę
+            label: "Karty usług"
+            label_singular: "usługę"
             widget: list
             summary: "{{fields.nazwa}}"
             collapsed: true
-            hint: "Kolejność kart możesz zmieniać, przeciągając je za uchwyt."
+            hint: "Kliknij nazwę usługi, żeby ją rozwinąć. Kolejność zmienisz, przeciągając kartę za uchwyt ═."
             fields:
               - { name: nazwa, label: "Nazwa usługi", widget: string }
               - { name: opis, label: "Opis usługi", widget: text, hint: "1–2 zdania." }
@@ -98,16 +136,16 @@ collections:
 
       # ---------- 3. DLA KOGO ----------
       - name: dla_kogo
-        label: "3. Dla kogo"
+        label: "3. Dla kogo (formy prawne i branże)"
         file: src/_data/dla_kogo.json
         fields:
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string }
-          - { name: naglowek, label: "Nagłówek sekcji", widget: string }
-          - { name: opis, label: "Opis pod nagłówkiem", widget: text, required: false }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
+          - { name: opis, label: "Tekst pod tytułem", widget: text, required: false }
           - { name: formy_tytul, label: "Tytuł lewej kolumny", widget: string, hint: "Np. „Formy prawne”." }
           - name: formy
-            label: "Formy prawne"
-            label_singular: formę prawną
+            label: "Lewa kolumna: formy prawne"
+            label_singular: "formę prawną"
             widget: list
             summary: "{{fields.nazwa}}"
             collapsed: true
@@ -116,8 +154,8 @@ collections:
               - { name: opis, label: "Krótki opis", widget: string }
           - { name: branze_tytul, label: "Tytuł prawej kolumny", widget: string, hint: "Np. „Branże”." }
           - name: branze
-            label: "Branże"
-            label_singular: branżę
+            label: "Prawa kolumna: branże"
+            label_singular: "branżę"
             widget: list
             summary: "{{fields.nazwa}}"
             collapsed: true
@@ -128,80 +166,80 @@ collections:
 
       # ---------- 4. DLACZEGO FORTIKA ----------
       - name: dlaczego
-        label: "4. Dlaczego Fortika"
+        label: "4. Dlaczego Fortika (atuty i zdjęcie zespołu)"
         file: src/_data/dlaczego.json
         fields:
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string }
-          - { name: naglowek, label: "Nagłówek sekcji", widget: string }
-          - { name: opis, label: "Opis pod nagłówkiem", widget: text }
-          - { name: zdjecie, label: "Zdjęcie zespołu lub biura", widget: image, required: false, choose_url: false, hint: "Zdjęcie poziome, najlepiej 1200×800 px. Dopóki go nie dodasz, wyświetla się szara ramka z napisem." }
-          - { name: zdjecie_opis, label: "Opis zdjęcia dla niewidomych i Google", widget: string, required: false, hint: "Co widać na zdjęciu, np. „Zespół biura przy biurku”." }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
+          - { name: opis, label: "Tekst pod tytułem", widget: text }
+          - { name: zdjecie, label: "📷 Zdjęcie zespołu lub biura", widget: image, required: false, choose_url: false, hint: "Zdjęcie poziome, najlepiej 1200×800 px. Dopóki go nie dodasz, w tym miejscu jest szara ramka." }
+          - { name: zdjecie_opis, label: "Co widać na zdjęciu", widget: string, required: false, hint: "Krótki opis dla osób niewidomych i dla Google, np. „Zespół biura przy biurku”." }
           - { name: zdjecie_podpis, label: "Podpis pod zdjęciem", widget: string, required: false }
           - name: atuty
-            label: "Atuty"
-            hint: "Lista kafelków po prawej stronie sekcji."
-            label_singular: atut
+            label: "Atuty (kafelki po prawej)"
+            label_singular: "atut"
             widget: list
             summary: "{{fields.tytul}}"
             collapsed: true
             fields:
               - { name: tytul, label: "Tytuł", widget: string }
               - { name: opis, label: "Opis", widget: text }
-              - { name: liczba, label: "Liczba w kwadracie", widget: string, required: false, hint: "Np. „10+”. Jeśli wpiszesz liczbę, zastąpi ona ikonę." }
+              - { name: liczba, label: "Liczba w kwadracie zamiast ikony", widget: string, required: false, hint: "Np. „10+”. Zostaw puste, żeby pokazać ikonę." }
               - { name: ikona, label: "Ikona", widget: select, default: zegar, options: *ikony }
 
       # ---------- 5. JAK ZACZĄĆ ----------
       - name: kroki
-        label: "5. Jak zacząć współpracę"
+        label: "5. Jak zacząć współpracę (kroki)"
         file: src/_data/kroki.json
         fields:
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string }
-          - { name: naglowek, label: "Nagłówek sekcji", widget: string }
-          - { name: opis, label: "Opis pod nagłówkiem", widget: text, required: false }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
+          - { name: opis, label: "Tekst pod tytułem", widget: text, required: false }
           - name: kroki
             label: "Kroki"
-            label_singular: krok
+            label_singular: "krok"
             widget: list
             summary: "{{fields.tytul}}"
             collapsed: true
-            hint: "Numery kroków nadają się same, według kolejności. Najlepiej wyglądają 4 kroki."
+            hint: "Numery nadają się same, według kolejności. Najlepiej wyglądają 4 kroki."
             fields:
               - { name: tytul, label: "Nazwa kroku", widget: string }
               - { name: opis, label: "Opis kroku", widget: text }
 
       # ---------- 6. WYCENA ----------
       - name: wycena
-        label: "6. Wycena i cennik"
+        label: "6. Wycena i cennik 💰"
         file: src/_data/wycena.json
         fields:
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string }
-          - { name: naglowek, label: "Nagłówek sekcji", widget: string }
-          - { name: opis, label: "Opis pod nagłówkiem", widget: text }
-          - { name: pokaz_cennik, label: "Pokazuj cennik orientacyjny", widget: boolean, default: true, hint: "Wyłącz, jeśli wolisz zostawić sam formularz wyceny." }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
+          - { name: opis, label: "Tekst pod tytułem", widget: text }
+          - { name: pokaz_cennik, label: "Pokazuj cennik", widget: boolean, default: true, hint: "Wyłącz, jeśli wolisz zostawić sam formularz wyceny." }
           - name: cennik
-            label: "Pozycje cennika"
-            label_singular: pozycję cennika
+            label: "Ceny"
+            label_singular: "cenę"
             widget: list
             required: false
+            collapsed: false
             summary: "{{fields.nazwa}}: {{fields.cena}}"
             fields:
               - { name: nazwa, label: "Usługa", widget: string, hint: "Np. „Pełna księgowość”." }
-              - { name: cena, label: "Cena", widget: string, hint: "Wpisz razem z dopiskiem, np. „od 450 zł netto/mies.”." }
-          - { name: uwaga, label: "Mały dopisek pod cennikiem", widget: string, required: false }
+              - { name: cena, label: "Cena", widget: string, hint: "Razem z dopiskiem, np. „od 450 zł netto/mies.”." }
+          - { name: uwaga, label: "Mały dopisek pod cenami", widget: string, required: false }
           - { name: formularz_tytul, label: "Tytuł formularza wyceny", widget: string }
-          - { name: formularz_przycisk, label: "Tekst przycisku formularza", widget: string }
+          - { name: formularz_przycisk, label: "Napis na przycisku formularza", widget: string }
 
       # ---------- 7. OPINIE ----------
       - name: opinie
-        label: "7. Opinie klientów"
+        label: "7. Opinie klientów ⭐"
         file: src/_data/opinie.json
         fields:
-          - { name: pokaz_sekcje, label: "Pokazuj sekcję opinii na stronie", widget: boolean, default: true }
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string }
-          - { name: naglowek, label: "Nagłówek sekcji", widget: string }
+          - { name: pokaz_sekcje, label: "Pokazuj sekcję opinii", widget: boolean, default: true }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
           - name: opinie
             label: "Opinie"
-            label_singular: opinię
+            label_singular: "opinię"
             widget: list
             required: false
             summary: "{{fields.autor}}"
@@ -211,30 +249,30 @@ collections:
               - { name: tresc, label: "Treść opinii", widget: text }
               - { name: autor, label: "Imię i nazwisko (lub imię i inicjał)", widget: string }
               - { name: firma, label: "Firma lub branża", widget: string, required: false }
-              - { name: zdjecie, label: "Zdjęcie lub logo", widget: image, required: false, choose_url: false, hint: "Kwadratowe, ok. 200×200 px." }
+              - { name: zdjecie, label: "Zdjęcie lub logo klienta", widget: image, required: false, choose_url: false, hint: "Kwadratowe, ok. 200×200 px." }
 
       # ---------- 8. FAQ ----------
       - name: faq
-        label: "8. Najczęstsze pytania (FAQ)"
+        label: "8. Najczęstsze pytania (FAQ) ❓"
         file: src/_data/faq.json
         fields:
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string }
-          - { name: naglowek, label: "Nagłówek sekcji", widget: string }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
           - name: opis
-            label: "Tekst pod nagłówkiem"
+            label: "Tekst pod tytułem"
             widget: markdown
             required: false
             minimal: true
             buttons: [bold, italic, link]
             editor_components: []
-            hint: "Link do formularza kontaktowego wstawisz przyciskiem z ikoną łańcucha, wpisując adres #kontakt."
+            hint: "Link do formularza: zaznacz słowa, kliknij ikonę łańcucha i wpisz #kontakt."
           - name: pytania
             label: "Pytania i odpowiedzi"
-            label_singular: pytanie
+            label_singular: "pytanie"
             widget: list
             summary: "{{fields.pytanie}}"
             collapsed: true
-            hint: "Przycisk „Dodaj pytanie” jest na dole listy. Pytanie usuniesz ikoną kosza obok niego."
+            hint: "Kliknij pytanie, żeby je rozwinąć. Nowe dodasz przyciskiem „Dodaj pytanie”, usuniesz krzyżykiem ×."
             fields:
               - { name: pytanie, label: "Pytanie", widget: string }
               - name: odpowiedz
@@ -246,57 +284,21 @@ collections:
 
       # ---------- 9. KONTAKT ----------
       - name: kontakt
-        label: "9. Kontakt (teksty sekcji)"
+        label: "9. Kontakt (teksty i formularz)"
         file: src/_data/kontakt.json
         fields:
-          - { name: nadtytul, label: "Mały napis nad nagłówkiem", widget: string }
-          - { name: naglowek, label: "Nagłówek sekcji", widget: string }
-          - { name: opis, label: "Opis pod nagłówkiem", widget: text, hint: "Telefon, e-mail, adres i godziny pracy zmienisz w „Ustawienia → Dane firmy i kontakt”." }
+          - { name: nadtytul, label: "Mały złoty napis nad tytułem", widget: string }
+          - { name: naglowek, label: "Tytuł sekcji", widget: string }
+          - { name: opis, label: "Tekst pod tytułem", widget: text, hint: "Telefon, e-mail, adres i godziny zmieniasz w menu „Telefon, adres i godziny”." }
           - { name: formularz_tytul, label: "Tytuł formularza", widget: string }
-          - { name: formularz_przycisk, label: "Tekst przycisku formularza", widget: string }
+          - { name: formularz_przycisk, label: "Napis na przycisku formularza", widget: string }
 
-  # -------------------------------------------------------
-  - name: ustawienia
-    label: Ustawienia
-    label_singular: Ustawienie
-    description: "Dane firmy widoczne w wielu miejscach strony oraz opis strony dla Google."
-    editor: { preview: false }
-    files:
-
-      - name: firma
-        label: "Dane firmy i kontakt"
-        file: src/_data/firma.json
-        fields:
-          - { name: telefon, label: "Telefon", widget: string, hint: "Np. „42 123 45 67” albo „+48 600 123 456”. Numer pokaże się w nagłówku, banerze, sekcji kontakt i stopce, a kliknięcie na telefonie od razu zadzwoni." }
-          - { name: email, label: "Adres e-mail", widget: string, hint: "Na ten adres trafiają też wiadomości z formularzy." }
-          - { name: godziny, label: "Godziny pracy", widget: string, required: false, hint: "Np. „pon.–pt.: 8:00–16:00”." }
-          - { name: ulica, label: "Ulica i numer", widget: string }
-          - { name: kod_pocztowy, label: "Kod pocztowy", widget: string }
-          - { name: miasto, label: "Miasto", widget: string }
-          - { name: dzielnica, label: "Dzielnica", widget: string, required: false, hint: "Wyświetla się w nawiasie w sekcji kontakt." }
-          - { name: facebook, label: "Adres profilu na Facebooku", widget: string, required: false, hint: "Cały adres, np. https://www.facebook.com/fortika. Zostaw puste, żeby ukryć ikonę." }
-          - { name: opis_stopka, label: "Krótki opis w stopce", widget: text }
-          - { name: nazwa, label: "Pełna nazwa firmy", widget: string }
-          - { name: nip, label: "NIP", widget: string }
-          - { name: krs, label: "KRS", widget: string }
-          - { name: regon, label: "REGON", widget: string }
-
-      - name: seo
-        label: "Wyszukiwarki i udostępnianie (SEO)"
-        file: src/_data/seo.json
-        fields:
-          - { name: tytul, label: "Tytuł strony w Google", widget: string, hint: "Widoczny na karcie przeglądarki i w wynikach Google. Najlepiej do 60 znaków." }
-          - { name: opis, label: "Opis strony w Google", widget: text, hint: "Krótki tekst pod tytułem w wynikach wyszukiwania. Najlepiej 140–160 znaków." }
-          - { name: og_tytul, label: "Tytuł przy udostępnianiu (Facebook, Messenger)", widget: string }
-          - { name: og_opis, label: "Opis przy udostępnianiu", widget: text }
-          - { name: og_obraz, label: "Obrazek przy udostępnianiu", widget: image, required: false, choose_url: false, hint: "Poziomy, 1200×630 px." }
-          - { name: adres_strony, label: "Adres strony", widget: string, hint: "Zmieniaj tylko przy zmianie domeny." }
-
-  # -------------------------------------------------------
+  # =======================================================
+  #  3. PODSTRONY
+  # =======================================================
   - name: podstrony
-    label: Podstrony
-    label_singular: Podstrona
-    editor: { preview: false }
+    label: "Polityka prywatności"
+    label_singular: "Podstrona"
     files:
       - name: polityka
         label: "Polityka prywatności (RODO)"
@@ -305,5 +307,25 @@ collections:
           - { name: layout, label: "Szablon", widget: hidden, default: polityka.njk }
           - { name: permalink, label: "Adres", widget: hidden, default: polityka-prywatnosci.html }
           - { name: tytul, label: "Tytuł strony", widget: string }
-          - { name: wzor, label: "Pokazuj żółtą ramkę „Wzór do weryfikacji”", widget: boolean, default: true, hint: "Wyłącz, gdy treść zostanie sprawdzona." }
+          - { name: wzor, label: "Pokazuj żółtą ramkę „Wzór do weryfikacji”", widget: boolean, default: true, hint: "Wyłącz, gdy prawnik sprawdzi treść." }
           - { name: body, label: "Treść", widget: markdown, buttons: [bold, italic, link, heading-two, bulleted-list, numbered-list], editor_components: [] }
+
+  # =======================================================
+  #  4. GOOGLE I UDOSTĘPNIANIE – zmieniane rzadko
+  # =======================================================
+  - name: seo
+    label: "Google i Facebook (rzadko zmieniane)"
+    label_singular: "Ustawienie"
+    description: "Jak strona wygląda w wynikach Google i po udostępnieniu linku na Facebooku lub w Messengerze."
+    editor: { preview: false }
+    files:
+      - name: seo
+        label: "Opis strony dla Google i Facebooka"
+        file: src/_data/seo.json
+        fields:
+          - { name: tytul, label: "Tytuł w Google", widget: string, hint: "Widoczny na karcie przeglądarki i w wynikach Google. Najlepiej do 60 znaków." }
+          - { name: opis, label: "Opis w Google", widget: text, hint: "Krótki tekst pod tytułem w wynikach wyszukiwania. Najlepiej 140–160 znaków." }
+          - { name: og_tytul, label: "Tytuł po udostępnieniu linku (Facebook, Messenger)", widget: string }
+          - { name: og_opis, label: "Opis po udostępnieniu linku", widget: text }
+          - { name: og_obraz, label: "Obrazek po udostępnieniu linku", widget: image, required: false, choose_url: false, hint: "Poziomy, 1200×630 px." }
+          - { name: adres_strony, label: "Adres strony", widget: string, hint: "Zmień na https://fortika.pl/ po podpięciu domeny." }

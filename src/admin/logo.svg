@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" width="320" height="72">
+  <rect x="0" y="4" width="64" height="64" rx="14" fill="#0f2a44"/>
+  <path d="M20 54V18h26v7H28v7h15v7H28v15z" fill="#e0a43b"/>
+  <text x="80" y="38" font-family="Manrope, Segoe UI, Arial, sans-serif" font-weight="800" font-size="30" fill="#0f2a44">Fortika</text>
+  <text x="81" y="60" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="500" font-size="15" fill="#5a6878">Panel treści strony</text>
+</svg>

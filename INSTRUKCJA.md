@@ -93,18 +93,21 @@ może logować się do `/admin`. Dostęp odbierasz w tym samym miejscu.
 
 ## Część 3. Zmiana treści w panelu
 
-1. Wejdź na **fortika.pl/admin** i zaloguj się.
+1. Wejdź na **fortika-storna.netlify.app/admin** (po podpięciu domeny: **fortika.pl/admin**) i zaloguj się.
 2. Po lewej wybierz:
-   - **Strona główna**: sekcje strony w kolejności od góry (baner, usługi, dla kogo, …, kontakt),
-   - **Ustawienia**: telefon, e-mail, adres, godziny pracy, Facebook, dane rejestrowe, opis dla Google,
-   - **Podstrony**: polityka prywatności.
+   - **Telefon, adres i godziny**: telefon, e-mail, adres, godziny pracy, Facebook, dane rejestrowe,
+   - **Sekcje strony głównej**: sekcje w kolejności od góry (baner, usługi, dla kogo, …, kontakt),
+   - **Polityka prywatności**,
+   - **Google i Facebook (rzadko zmieniane)**: opis strony w wynikach Google i po udostępnieniu linku.
 3. Kliknij sekcję i zmień tekst. Pod każdym polem jest podpowiedź, co ono zmienia.
+   **Po prawej widzisz podgląd** tej części strony. Zmienia się na bieżąco, w trakcie pisania.
+   Ikoną oka (👁) w prawym górnym rogu podglądu możesz go ukryć albo pokazać.
 4. Na górze kliknij **Opublikuj**, a potem **Opublikuj teraz**.
 5. Poczekaj **1–2 minuty** i odśwież stronę (**Ctrl+F5**). Zmiana będzie widoczna.
    Postęp widać w Netlify, w zakładce **Deploys**.
 
 ### Przykład: wpisanie numeru telefonu
-**Ustawienia → Dane firmy i kontakt → Telefon** → wpisz np. `42 123 45 67` → **Opublikuj teraz**.
+**Telefon, adres i godziny → Dane kontaktowe i rejestrowe firmy → Numer telefonu** → wpisz np. `42 123 45 67` → **Opublikuj teraz**.
 Numer pojawi się w nagłówku, banerze, sekcji kontakt i stopce. Kliknięcie go na telefonie od razu dzwoni.
 
 ### Listy (usługi, FAQ, opinie, cennik, kroki)
@@ -121,7 +124,7 @@ Zanim wgrasz zdjęcie, zmniejsz je do rozmiaru z podpowiedzi (np. 1200×800 px).
 ### Opinie klientów
 Dopóki lista opinii jest pusta, na stronie widać trzy puste ramki. Po dodaniu pierwszej
 prawdziwej opinii ramki znikną. Sekcję można też całkiem ukryć przełącznikiem
-„Pokazuj sekcję opinii na stronie”.
+„Pokazuj sekcję opinii” w sekcji **7. Opinie klientów**.
 
 ### Coś poszło nie tak? Cofnięcie zmiany
 Każda publikacja jest zapisywana. W Netlify wejdź w **Deploys**, kliknij wcześniejszą wersję,

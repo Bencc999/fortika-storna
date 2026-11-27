@@ -1,6 +1,9 @@
+import fs from "node:fs";
+import path from "node:path";
 import markdownIt from "markdown-it";
+import { MD_OPTIONS, telHref, absoluteUrl, mdFilter } from "./src/admin/filtry.js";
 
-const md = markdownIt({ html: false, linkify: true, typographer: false });
+const md = markdownIt(MD_OPTIONS);
 
 export default function (eleventyConfig) {
   // Pliki kopiowane 1:1 (bez przetwarzania)
@@ -14,24 +17,20 @@ export default function (eleventyConfig) {
 
   eleventyConfig.setLibrary("md", md);
 
-  // Rok w stopce
   eleventyConfig.addGlobalData("rok", () => new Date().getFullYear());
+  eleventyConfig.addFilter("md", mdFilter(md));
+  eleventyConfig.addFilter("telHref", telHref);
+  eleventyConfig.addFilter("absoluteUrl", absoluteUrl);
 
-  // "Markdown" z panelu (pogrubienia, linki) -> HTML
-  eleventyConfig.addFilter("md", (text) => md.render(String(text || "")).trim());
-
-  // Numer telefonu do linku tel:  "42 123 45 67" -> "+48421234567"
-  eleventyConfig.addFilter("telHref", (phone) => {
-    let digits = String(phone || "").replace(/[^\d+]/g, "");
-    if (!digits.replace("+", "")) return "+48000000000"; // numer jeszcze nie wpisany
-    if (digits.startsWith("00")) digits = "+" + digits.slice(2);
-    if (!digits.startsWith("+")) digits = "+48" + digits.replace(/^48(?=\d{9}$)/, "");
-    return digits;
-  });
-
-  // Pełny adres obrazka do podglądu w social media
-  eleventyConfig.addFilter("absoluteUrl", (path, base) => {
-    try { return new URL(path, base).href; } catch { return path; }
+  // Podgląd w panelu: kopia szablonów i treści w /admin/podglad/,
+  // z których panel składa stronę w przeglądarce w trakcie edycji.
+  eleventyConfig.on("eleventy.after", ({ dir }) => {
+    const cel = path.join(dir.output, "admin", "podglad");
+    fs.mkdirSync(cel, { recursive: true });
+    fs.copyFileSync("src/index.njk", path.join(cel, "index.njk"));
+    fs.copyFileSync("src/_includes/stopka.njk", path.join(cel, "stopka.njk"));
+    fs.copyFileSync("src/_includes/polityka.njk", path.join(cel, "polityka.njk"));
+    fs.cpSync("src/_data", path.join(cel, "dane"), { recursive: true });
   });
 
   return {
