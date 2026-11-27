@@ -3,16 +3,21 @@
 #  Adres panelu: https://fortika-storna.netlify.app/admin/
 # =========================================================
 
+# Logowanie e-mailem i hasłem przez DecapBridge (decapbridge.com).
+# Użytkownicy nie potrzebują konta GitHub. Zaprasza się ich w panelu DecapBridge.
 backend:
-  name: github
+  name: git-gateway
   repo: Bencc999/fortika-storna   # repozytorium na GitHubie (login/nazwa)
   branch: main
+  # ↓↓↓ ZMIEŃ: wklej tu „Site ID” z DecapBridge (zakładka strony w panelu DecapBridge)
+  identity_url: https://auth.decapbridge.com/sites/WKLEJ-SITE-ID-Z-DECAPBRIDGE
+  gateway_url: https://gateway.decapbridge.com
   commit_messages:
-    create: "Panel: dodano {{collection}} „{{slug}}”"
-    update: "Panel: zmiana – {{slug}}"
-    delete: "Panel: usunięto {{collection}} „{{slug}}”"
-    uploadMedia: "Panel: wgrano zdjęcie {{path}}"
-    deleteMedia: "Panel: usunięto zdjęcie {{path}}"
+    create: "Panel: dodano {{collection}} „{{slug}}” ({{author-name}})"
+    update: "Panel: zmiana – {{slug}} ({{author-name}})"
+    delete: "Panel: usunięto {{collection}} „{{slug}}” ({{author-name}})"
+    uploadMedia: "Panel: wgrano zdjęcie {{path}} ({{author-name}})"
+    deleteMedia: "Panel: usunięto zdjęcie {{path}} ({{author-name}})"
 
 # Pozwala edytować treści lokalnie (npx decap-server) bez logowania do GitHuba.
 local_backend: true
